@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>今天吃什么</title>
+  <link rel="stylesheet" href="./assets/styles/index.css">
   <script src="./lib/vue.js"></script>
 </head>
 <body>
 
   <div id="app">
     今天中午吃{{message}}
-    <div class="start">
-      点击开始
+    <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
+      {{btnText}}
     </div>
   </div>
 
@@ -20,22 +21,62 @@
     var app = new Vue({
       el: '#app',
       data: {
-        message: 'Hello Vue!',
+        btnText: '点击开始',
+        isActive: false,
+        message: '刘胖子',
+        randomId: '',
         list: [
           '刘胖子',
-          '老长沙'
+          '老长沙',
+          '刘笼子',
+          '牛尾巴',
+          '津市牛肉粉',
+          '兰州拉面',
+          '拌面',
+          '热干面',
+          'biangbiang面',
+          '牛肉炒饭',
+          '炒个锤子',
+          '蛙来哒',
         ]
       },
       computed: {
-
+        startBtnClickEvent: function(){
+          if ( this.isActive ) {
+            return 'stopRandom'
+          }
+          else {
+            return 'createRandomlist'
+          }
+        }
       },
       methods: {
+        btnClick: function(){
+          if ( this.isActive ) {
+            this.stopRandom()
+          }
+          else {
+            this.createRandomlist()
+          }
+        },
         createRandomlist: function(){
+          this.isActive = true
+          this.btnText = '停'
+          var self = this
+          var list = this.list
+          this.randomId = setInterval(function(){
+            self.message = list[Math.floor(Math.random()*list.length)]
+          },100)
+        },
+        stopRandom: function(){
+          this.isActive = false
+          this.btnText = '点击开始'
           console.log(123)
-         }
+          clearInterval(this.randomId)
+        }
       },
       created: function(){  // 在实例被创建之后执行
-        this.createRandomlist()
+
       }
     })
   </script>
