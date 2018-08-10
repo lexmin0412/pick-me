@@ -11,7 +11,14 @@
 <body>
 
   <div id="app">
-    今天中午吃{{message}}
+    <div class="tab">
+      <div class="tab-item" v-on:click="tabClick" data-index="0">早上吃什么</div>
+      <div class="tab-item active" v-on:click="tabClick" data-index="1">中午吃什么</div>
+      <div class="tab-item" v-on:click="tabClick" data-index="2">晚上吃什么</div>
+    </div>
+    <div class="display-item">
+      今天中午吃{{message}}
+    </div>
     <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
       {{btnText}}
     </div>
@@ -25,6 +32,7 @@
         isActive: false,
         message: '刘胖子',
         randomId: '',
+        tabIndex: 0,
         list: [
           '刘胖子',
           '老长沙',
@@ -41,25 +49,40 @@
         ]
       },
       computed: {
-        startBtnClickEvent: function(){
-          if ( this.isActive ) {
-            return 'stopRandom'
-          }
-          else {
-            return 'createRandomlist'
-          }
-        }
+
       },
       methods: {
+        // tab点击
+        tabClick: function(e){
+
+          if (  ) {
+
+          }
+
+          var currentNode = e
+          var tabList = document.getElementsByClassName('tab-item')
+          console.log(tabList)
+          for ( var i=0; i<tabList.length; i++ ) {
+            if ( i == currentIndex ) {
+              console.log(i)
+              tabList[i].classList.add('active')
+            }
+            else {
+              tabList[i].classList.remove('active')
+            }
+          }
+        },
+        // 按钮点击
         btnClick: function(){
           if ( this.isActive ) {
             this.stopRandom()
           }
           else {
-            this.createRandomlist()
+            this.startRandom()
           }
         },
-        createRandomlist: function(){
+        // 开始
+        startRandom: function(){
           this.isActive = true
           this.btnText = '停'
           var self = this
@@ -68,10 +91,10 @@
             self.message = list[Math.floor(Math.random()*list.length)]
           },100)
         },
+        // 停止
         stopRandom: function(){
           this.isActive = false
           this.btnText = '点击开始'
-          console.log(123)
           clearInterval(this.randomId)
         }
       },

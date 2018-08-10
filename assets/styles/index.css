@@ -13,10 +13,29 @@ body {
   background-color: #4688f4;
   text-align: center;
 }
+#app .tab {
+  display: flex;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+#app .tab .tab-item {
+  flex: 1;
+  height: 2rem;
+  line-height: 2rem;
+  border-right: 1px solid #eff0f5;
+  font-size: 0.8rem;
+  background-color: #fff;
+}
+#app .tab .tab-item.active {
+  background-color: #ffe400;
+}
+#app .display-item {
+  margin-top: 4rem;
+}
 #app .btn-start {
   width: 200px;
   height: 50px;
-  margin-top: 40px;
+  margin-top: 4rem;
   border-radius: 25px;
   background-color: #ffe400;
   padding: 0 50px;
