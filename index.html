@@ -12,12 +12,12 @@
 
   <div id="app">
     <div class="tab">
-      <div class="tab-item" v-on:click="tabClick" data-index="0">早上吃什么</div>
-      <div class="tab-item active" v-on:click="tabClick" data-index="1">中午吃什么</div>
-      <div class="tab-item" v-on:click="tabClick" data-index="2">晚上吃什么</div>
+      <div class="tab-item active" v-on:click="tabClick" data-index="0" data-duration='早上'>早上吃什么</div>
+      <div class="tab-item" v-on:click="tabClick" data-index="1" data-duration='中午'>中午吃什么</div>
+      <div class="tab-item" v-on:click="tabClick" data-index="2" data-duration='晚上'>晚上吃什么</div>
     </div>
     <div class="display-item">
-      今天中午吃{{message}}
+      今天{{currentDuration}}吃{{message}}
     </div>
     <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
       {{btnText}}
@@ -33,6 +33,7 @@
         message: '刘胖子',
         randomId: '',
         tabIndex: 0,
+        currentDuration: '早上',
         list: [
           '刘胖子',
           '老长沙',
@@ -56,9 +57,11 @@
         tabClick: function(e){
           var currentNode = e
           var tabList = document.getElementsByClassName('tab-item')
-          console.log(tabList)
+          // console.log('e',e.target.)
+          this.tabIndex = e.target.dataset.index
+          this.currentDuration = e.target.dataset.duration
           for ( var i=0; i<tabList.length; i++ ) {
-            if ( i == currentIndex ) {
+            if ( i == this.tabIndex ) {
               console.log(i)
               tabList[i].classList.add('active')
             }
