@@ -28,12 +28,12 @@
   font-weight: 700;
 }
 #app .head-box .head-title .head-title-item:first-child {
-  transform: rotate(40deg);
-  color: #666;
+  transform: rotate(20deg);
+  color: #45aafa;
 }
 #app .head-box .head-title .head-title-item:nth-child(2) {
   transform: rotate(-20deg) translateY(0.8rem);
-  color: #45aafa;
+  color: #666;
 }
 #app .head-box .head-title .head-title-item:nth-child(3) {
   transform: rotate(30deg) translateY(-0.1rem);
