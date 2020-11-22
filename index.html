@@ -14,6 +14,11 @@
 
   <div id="app">
 
+    <audio src="./assets/audios/schnappi.m4a"
+      autoplay
+      id="bg_audio"
+    ></audio>
+
     <div class="head-box">
       <img src="./assets/images/timg.gif" alt="">
       <div class="head-title">
@@ -60,6 +65,14 @@
   <script src='./js/menuList.js'></script>
 
   <script>
+
+    window.onload = () => {
+      document.getElementById('app').addEventListener('click', () => {
+        console.log('click')
+        document.getElementById('bg_audio').play()
+      })
+    }
+    
     var app = new Vue( {
       el: '#app',
       data: {
@@ -118,6 +131,7 @@
         },
         // 开始
         startRandom: function () {
+          document.getElementById('bg_audio').play()
           this.isActive = true
           this.btnText = '停'
           var self = this
