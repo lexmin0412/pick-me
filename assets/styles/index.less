@@ -4,29 +4,37 @@
 }
 
 body {
-  background-color: #4688f4;
+  // background-color: #4688f4;
+  height: 100%;
+  background: url(./../../assets/images/timg.gif);
 }
 
 #app {
-  position: absolute;
+  position: absolute;width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  background-color: #4688f4;
+  background-color: #fff;
   text-align: center;
 
-  .tab {
+  .tab-list {
     display: flex;
     border-radius: 1rem;
     overflow: hidden;
+    width: 80vw;
+    margin: 0 auto;
 
     .tab-item {
       flex: 1;
-      height: 2rem;
-      line-height: 2rem;
+      height: 3rem;
+      line-height: 3rem;
       border-right: 1px solid #eff0f5;
-      font-size: 0.8rem;
-      background-color: #fff;
+      font-size: 1rem;
+      background-color: #eff0f5;
+
+      &:hover {
+        background-color: #ffe400;
+      }
 
       &.active {
         background-color: #ffe400;
@@ -34,12 +42,14 @@ body {
     }
   }
   .display-item {
-    margin-top: 4rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #ff4a4a;
   }
   .btn-start {
     width: 200px;
     height: 50px;
-    margin-top: 4rem;
+    margin: 3rem auto 0;
     border-radius: 25px;
     background-color: #ffe400;
     padding: 0 50px;

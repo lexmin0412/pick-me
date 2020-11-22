@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +9,48 @@
   <link rel="stylesheet" href="./assets/styles/index.css">
   <script src="./lib/vue.js"></script>
 </head>
+
 <body>
 
   <div id="app">
-    <div class="tab">
-      <div class="tab-item active" v-on:click="tabClick" data-index="0" data-duration='早上'>早上吃什么</div>
-      <div class="tab-item" v-on:click="tabClick" data-index="1" data-duration='中午'>中午吃什么</div>
-      <div class="tab-item" v-on:click="tabClick" data-index="2" data-duration='晚上'>晚上吃什么</div>
+    <div class="tab-list">
+
+      <div v-for="item in tabList" 
+        :key="item.type"
+        class="tab-item"
+        @click="tabClick"
+        :data-type="item.type"
+      >
+        {{ item.text }}吃什么
+      </div>
     </div>
     <div class="display-item">
-      今天{{currentDuration}}吃{{message}}
+      {{currentBuyer}} {{ currentType === 'breakfast' ? '买' : '' }} {{message}}
     </div>
     <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
       {{btnText}}
     </div>
   </div>
 
+  <script src="./js/createId.js"></script>
+  <script src='./js/menuList.js'></script>
+
   <script>
-    var app = new Vue({
+    var app = new Vue( {
       el: '#app',
       data: {
         btnText: '点击开始',
         isActive: false,
         message: '刘胖子',
         randomId: '',
-        tabIndex: 0,
         currentDuration: '早上',
+        foodList: foodList,
+        currentList: foodList[0],
+        currentBuyer: '',
+        buyerList: [
+          '张小乐',
+          '黄小敏'
+        ],
         list: [
           '刘胖子',
           '老长沙',
@@ -47,60 +64,85 @@
           '牛肉炒饭',
           '炒个锤子',
           '蛙来哒',
-        ]
+        ],
+        // 当前type
+        currentType: 'breakfast',
+        // tab列表
+        tabList: [ {
+            type: 'breakfast',
+            text: '早餐'
+          },
+          {
+            type: 'lunch',
+            text: '中午'
+          },
+          {
+            type: 'dinner',
+            text: '晚上'
+          }
+        ],
       },
-      computed: {
-
-      },
+      computed: {},
       methods: {
         // tab点击
-        tabClick: function(e){
+        tabClick: function ( e ) {
           var currentNode = e
-          var tabList = document.getElementsByClassName('tab-item')
-          // console.log('e',e.target.)
-          this.tabIndex = e.target.dataset.index
-          this.currentDuration = e.target.dataset.duration
-          for ( var i=0; i<tabList.length; i++ ) {
-            if ( i == this.tabIndex ) {
-              console.log(i)
-              tabList[i].classList.add('active')
-            }
-            else {
-              tabList[i].classList.remove('active')
+          var tabElementList = document.getElementsByClassName( 'tab-item' )
+          this.currentType = e.target.dataset.type
+          this.currentList = this.foodList[this.currentType]
+          for ( var i = 0; i < tabElementList.length; i++ ) {
+            if ( tabElementList[i].dataset.type == this.currentType ) {
+              tabElementList[ i ].classList.add( 'active' )
+            } else {
+              tabElementList[ i ].classList.remove( 'active' )
             }
           }
         },
         // 按钮点击
-        btnClick: function(){
+        btnClick: function () {
           if ( this.isActive ) {
             this.stopRandom()
-          }
-          else {
+          } else {
             this.startRandom()
           }
         },
         // 开始
-        startRandom: function(){
+        startRandom: function () {
           this.isActive = true
           this.btnText = '停'
           var self = this
-          var list = this.list
-          this.randomId = setInterval(function(){
-            self.message = list[Math.floor(Math.random()*list.length)]
-          },100)
+          var list = this.currentList
+          this.randomId = setInterval( function () {
+            self.message = list[ Math.floor( Math.random() * list.length ) ].name
+            if ( self.currentType === 'breakfast' ) {
+              self.currentBuyer = self.buyerList[Math.floor(Math.random() * 2)] 
+            } else {
+              self.currentBuyer = ''
+            }
+          }, 100 )
         },
         // 停止
-        stopRandom: function(){
+        stopRandom: function () {
           this.isActive = false
           this.btnText = '点击开始'
-          clearInterval(this.randomId)
+
+          // 通过算法计算最终结果
+          console.log('this.currentList', this.currentList)
+          var arr = this.currentList.reduce(function(a, b) {
+            console.log(a.weight, b.weight)
+            return a.weight + b.weight;
+          })
+          console.log('arr', arr)
+          
+          clearInterval( this.randomId )
         }
       },
-      created: function(){  // 在实例被创建之后执行
+      created: function () { // 在实例被创建之后执行
 
       }
-    })
+    } )
   </script>
 
 </body>
+
 </html>

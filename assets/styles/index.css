@@ -3,39 +3,48 @@
   padding: 0;
 }
 body {
-  background-color: #4688f4;
+  height: 100%;
+  background: url(../../assets/images/timg.gif);
 }
 #app {
   position: absolute;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #4688f4;
+  background-color: #fff;
   text-align: center;
 }
-#app .tab {
+#app .tab-list {
   display: flex;
   border-radius: 1rem;
   overflow: hidden;
+  width: 80vw;
+  margin: 0 auto;
 }
-#app .tab .tab-item {
+#app .tab-list .tab-item {
   flex: 1;
-  height: 2rem;
-  line-height: 2rem;
+  height: 3rem;
+  line-height: 3rem;
   border-right: 1px solid #eff0f5;
-  font-size: 0.8rem;
-  background-color: #fff;
+  font-size: 1rem;
+  background-color: #eff0f5;
 }
-#app .tab .tab-item.active {
+#app .tab-list .tab-item:hover {
+  background-color: #ffe400;
+}
+#app .tab-list .tab-item.active {
   background-color: #ffe400;
 }
 #app .display-item {
-  margin-top: 4rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #ff4a4a;
 }
 #app .btn-start {
   width: 200px;
   height: 50px;
-  margin-top: 4rem;
+  margin: 3rem auto 0;
   border-radius: 25px;
   background-color: #ffe400;
   padding: 0 50px;
