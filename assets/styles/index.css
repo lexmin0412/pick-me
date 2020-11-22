@@ -9,6 +9,42 @@
   flex-direction: column;
   text-align: center;
 }
+#app .head-box {
+  position: relative;
+}
+#app .head-box .head-title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  margin-top: 1rem;
+  box-sizing: border-box;
+}
+#app .head-box .head-title .head-title-item {
+  color: #45aafa;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+#app .head-box .head-title .head-title-item:first-child {
+  transform: rotate(40deg);
+}
+#app .head-box .head-title .head-title-item:nth-child(2) {
+  transform: rotate(-20deg) translateY(0.8rem);
+}
+#app .head-box .head-title .head-title-item:nth-child(3) {
+  transform: rotate(30deg) translateY(-0.1rem);
+}
+#app .head-box .head-title .head-title-item:nth-child(4) {
+  transform: rotate(-10deg) translateY(0.8rem);
+}
+#app .head-box .head-title .head-title-item:nth-child(5) {
+  transform: rotate(20deg);
+}
+#app .head-box .head-title .head-title-item:nth-child(6) {
+  transform: rotate(-10deg) translateY(0.8rem);
+}
 #app .main-box {
   position: relative;
   flex: 1;
@@ -54,6 +90,10 @@
   color: #222;
 }
 #app .main-box .main-content .display-item {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
   height: 2rem;
   line-height: 2rem;
   font-size: 1.4rem;
