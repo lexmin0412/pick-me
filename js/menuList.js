@@ -52,6 +52,10 @@ var foodList = {
     {
       name: '饭',
       weight: 100,
-    }
+    },
+    {
+      name: '凉面',
+      weight: 100,
+    },
   ],
 }
