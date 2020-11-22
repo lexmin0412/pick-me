@@ -13,23 +13,27 @@
 <body>
 
   <div id="app">
-    <div class="tab-list">
+    <div class="main-box">
+      <div class="main-mask">
 
-      <div v-for="item in tabList" 
-        :key="item.type"
-        class="tab-item"
-        @click="tabClick"
-        :data-type="item.type"
-      >
-        {{ item.text }}吃什么
       </div>
+      <div class="main-content">
+        <div class="tab-list">
+
+          <div v-for="item in tabList" :key="item.type" class="tab-item" @click="tabClick" :data-type="item.type">
+            {{ item.text }}吃什么
+          </div>
+        </div>
+        <div class="display-item">
+          {{currentBuyer}} {{ currentType === 'breakfast' ? '买' : '' }} {{message}}
+        </div>
+        <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
+          {{btnText}}
+        </div>
+      </div>
+
     </div>
-    <div class="display-item">
-      {{currentBuyer}} {{ currentType === 'breakfast' ? '买' : '' }} {{message}}
-    </div>
-    <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
-      {{btnText}}
-    </div>
+    <img src='./assets/images/labixiaoxin.jpg' class="bottom-img">
   </div>
 
   <script src="./js/createId.js"></script>
@@ -45,7 +49,7 @@
         randomId: '',
         currentDuration: '早上',
         foodList: foodList,
-        currentList: foodList[0],
+        currentList: foodList[ 0 ],
         currentBuyer: '',
         buyerList: [
           '张小乐',
@@ -89,9 +93,9 @@
           var currentNode = e
           var tabElementList = document.getElementsByClassName( 'tab-item' )
           this.currentType = e.target.dataset.type
-          this.currentList = this.foodList[this.currentType]
+          this.currentList = this.foodList[ this.currentType ]
           for ( var i = 0; i < tabElementList.length; i++ ) {
-            if ( tabElementList[i].dataset.type == this.currentType ) {
+            if ( tabElementList[ i ].dataset.type == this.currentType ) {
               tabElementList[ i ].classList.add( 'active' )
             } else {
               tabElementList[ i ].classList.remove( 'active' )
@@ -115,7 +119,7 @@
           this.randomId = setInterval( function () {
             self.message = list[ Math.floor( Math.random() * list.length ) ].name
             if ( self.currentType === 'breakfast' ) {
-              self.currentBuyer = self.buyerList[Math.floor(Math.random() * 2)] 
+              self.currentBuyer = self.buyerList[ Math.floor( Math.random() * 2 ) ]
             } else {
               self.currentBuyer = ''
             }
@@ -127,13 +131,13 @@
           this.btnText = '点击开始'
 
           // 通过算法计算最终结果
-          console.log('this.currentList', this.currentList)
-          var arr = this.currentList.reduce(function(a, b) {
-            console.log(a.weight, b.weight)
+          console.log( 'this.currentList', this.currentList )
+          var arr = this.currentList.reduce( function ( a, b ) {
+            console.log( a.weight, b.weight )
             return a.weight + b.weight;
-          })
-          console.log('arr', arr)
-          
+          } )
+          console.log( 'arr', arr )
+
           clearInterval( this.randomId )
         }
       },
