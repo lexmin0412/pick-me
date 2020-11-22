@@ -108,6 +108,7 @@
   font-size: 1.4rem;
   color: #fff;
   font-weight: 700;
+  width: 100%;
 }
 #app .main-box .main-content .btn-start {
   position: absolute;
