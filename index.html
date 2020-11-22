@@ -13,6 +13,9 @@
 <body>
 
   <div id="app">
+
+    <img src="./assets/images/timg.gif" alt="">
+    
     <div class="main-box">
       <div class="main-mask">
 
@@ -27,7 +30,7 @@
             @click="tabClick" 
             :data-type="item.type"
           >
-            {{ item.text }}吃什么
+            {{ item.text }}吃啥
           </div>
         </div>
         <div class="display-item">
@@ -55,32 +58,18 @@
         randomId: '',
         currentDuration: '早上',
         foodList: foodList,
-        currentList: foodList[ 0 ],
+        currentList: foodList.breakfast,
         currentBuyer: '张小乐',
         buyerList: [
           '张小乐',
           '黄小敏'
-        ],
-        list: [
-          '刘胖子',
-          '老长沙',
-          '刘笼子',
-          '牛尾巴',
-          '津市牛肉粉',
-          '兰州拉面',
-          '拌面',
-          '热干面',
-          'biangbiang面',
-          '牛肉炒饭',
-          '炒个锤子',
-          '蛙来哒',
         ],
         // 当前type
         currentType: 'breakfast',
         // tab列表
         tabList: [ {
             type: 'breakfast',
-            text: '早餐'
+            text: '早上'
           },
           {
             type: 'lunch',

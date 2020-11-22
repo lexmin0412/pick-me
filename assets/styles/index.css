@@ -12,7 +12,6 @@
 #app .main-box {
   position: relative;
   flex: 1;
-  background: url(../../assets/images/timg.gif) no-repeat center;
 }
 #app .main-box .main-mask {
   position: absolute;
@@ -20,18 +19,22 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 #app .main-box .main-content {
+  height: 100%;
   position: absolute;
   z-index: 2;
   top: 50%;
   width: 100%;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 #app .main-box .main-content .tab-list {
   display: flex;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   overflow: hidden;
   width: 80vw;
   margin: 0 auto;
@@ -40,9 +43,9 @@
   flex: 1;
   height: 3rem;
   line-height: 3rem;
-  border-right: 1px solid #eff0f5;
+  border-right: 1px solid #fff;
   font-size: 1rem;
-  background-color: #eff0f5;
+  background-color: #fff;
 }
 #app .main-box .main-content .tab-list .tab-item:hover {
   background-color: #ffe400;
@@ -53,20 +56,19 @@
 #app .main-box .main-content .display-item {
   height: 2rem;
   line-height: 2rem;
-  margin-top: 2rem;
-  font-size: 1.2rem;
-  color: #45aafa;
+  font-size: 1.4rem;
+  color: #fff;
   font-weight: 700;
 }
 #app .main-box .main-content .btn-start {
   width: 200px;
   height: 50px;
-  margin: 3rem auto 0;
   border-radius: 25px;
   background-color: #ffe400;
   padding: 0 50px;
   line-height: 50px;
   color: #222;
+  margin: 0 auto;
 }
 #app .main-box .main-content .btn-start.active {
   color: #fff;
