@@ -1,0 +1,54 @@
+name: Node CI
+
+# 指定触发action的事件
+on:
+  push:
+    # 指定触发指定事件的分支 仅master触发
+    branches:
+      - dev
+  pull_request: # 待测试
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ strategy.matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ strategy.matrix.node-version }}
+      - name: 执行npm install
+        run: |
+          npm install
+        env:
+          CI: true
+      - name: 执行npm run build
+        run: |
+          npm run build
+      - name: 进入dist文件夹 准备提交代码
+        run: |
+          cd build/
+          echo 'ls 查看dist文件夹下的所有文件'
+          ls
+          git init
+          echo 'git config'
+          git config --global user.name ${{ secrets.USER_NAME }}
+          git config --global user.email ${{ secrets.USER_EMAIL }}
+          git remote add origin https://lexmin0412:${{ secrets.USER_PWD }}@github.com/lexmin0412/random_lunch.git
+          git fetch origin
+          echo 'git branch -r'
+          git branch -r
+          echo 'git branch -l'
+          git branch -l
+          echo 'git add .'
+          git add .
+          echo 'git commit -m "deploy"'
+          git commit -m 'deploy'
+          echo 'git push'
+          git push -f origin HEAD:master
