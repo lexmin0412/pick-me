@@ -20,12 +20,18 @@
       <div class="main-content">
         <div class="tab-list">
 
-          <div v-for="item in tabList" :key="item.type" class="tab-item" @click="tabClick" :data-type="item.type">
+          <div v-for="item in tabList" 
+            :key="item.type" 
+            class="tab-item" 
+            :class='{active: item.type === currentType}'
+            @click="tabClick" 
+            :data-type="item.type"
+          >
             {{ item.text }}吃什么
           </div>
         </div>
         <div class="display-item">
-          {{currentBuyer}} {{ currentType === 'breakfast' ? '买' : '' }} {{message}}
+          {{currentType === 'breakfast' ? currentBuyer : ''}} {{ currentType === 'breakfast' ? '买' : '' }} {{message}}
         </div>
         <div class="btn-start" v-bind:class='{active: isActive}' v-on:click="btnClick">
           {{btnText}}
@@ -45,12 +51,12 @@
       data: {
         btnText: '点击开始',
         isActive: false,
-        message: '刘胖子',
+        message: '',
         randomId: '',
         currentDuration: '早上',
         foodList: foodList,
         currentList: foodList[ 0 ],
-        currentBuyer: '',
+        currentBuyer: '张小乐',
         buyerList: [
           '张小乐',
           '黄小敏'

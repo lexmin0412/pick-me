@@ -51,6 +51,8 @@
   background-color: #ffe400;
 }
 #app .main-box .main-content .display-item {
+  height: 2rem;
+  line-height: 2rem;
   margin-top: 2rem;
   font-size: 1.2rem;
   color: #45aafa;
