@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "pickme",
+  "description": "选择困难症解决方案",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}
