@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "pickme",
   "description": "选择困难症解决方案",
-  "appid": "touristappid",
+  "appid": "wx2ab38b366d1a6564",
   "setting": {
     "urlCheck": true,
     "es6": false,

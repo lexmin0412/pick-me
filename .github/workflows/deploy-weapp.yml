@@ -1,0 +1,25 @@
+name: 部署小程序
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取仓库代码
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: 写入代码上传密钥
+      - run: |
+          echo {{secrets.MP_PRIVATE_KEY}} > private/private.wx2ab38b366d1a6564.key
+
+      - name: 构建小程序并上传微信公众平台
+        run: |
+          npm install pnpm -g
+          pnpm i
+          pnpm build:weapp:upload
+

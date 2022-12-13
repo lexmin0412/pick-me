@@ -1,5 +1,17 @@
 import * as path from 'path'
 
+const CIPluginOpt = {
+  // 微信小程序
+  weapp: {
+    appid: "wx2ab38b366d1a6564",
+    privateKeyPath: "private/private.wx2ab38b366d1a6564.key"
+  },
+  // 版本号
+  version: "1.0.0",
+  // 版本发布描述
+  desc: "更新"
+}
+
 const config = {
   projectName: 'pickme',
   date: '2022-12-13',
@@ -15,7 +27,9 @@ const config = {
     // TODO 这里 当不引入path时将会报错：找不到@tarojs/plugin-framework-react
     '@': path.resolve(__dirname, '..', 'src'),
   },
-  plugins: [],
+  plugins: [
+    ["@tarojs/plugin-mini-ci", CIPluginOpt]
+  ],
   defineConstants: {
   },
   copy: {
