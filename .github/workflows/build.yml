@@ -2,7 +2,7 @@ name: 部署 h5 应用
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   main:
