@@ -15,6 +15,7 @@ jobs:
 
       - name: 写入代码上传密钥
         run: |
+          touch private/private.wx2ab38b366d1a6564.key
           echo {{secrets.MP_PRIVATE_KEY}} > private/private.wx2ab38b366d1a6564.key
 
       - name: 构建小程序并上传微信公众平台
