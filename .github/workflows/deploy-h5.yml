@@ -13,11 +13,16 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: 安装依赖
+      - name: 构建产物
         run: |
           npm install pnpm -g
           pnpm i
           pnpm build:h5
+
+      - name: 生成404页面
+        run: |
+          cp dist/index.html dist/404.html
+
       - name: h5 部署
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
