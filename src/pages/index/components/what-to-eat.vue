@@ -3,7 +3,7 @@
 		<view id="app">
 			{{ schnappiMusic }}
 			<audio
-				src="@/assets/audios/schnappi.m4a"
+				src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/audio/schnappi.m4a"
 				:autoplay="true"
 				id="bg_audio"
         style="width: 0;height:0"
@@ -11,7 +11,7 @@
 
 			<view class="head-box">
 				<image
-					src="@/assets/images/timg.gif"
+					src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/timg.gif"
 					alt=""
 				/>
 				<view class="head-title">
@@ -54,7 +54,7 @@
 				</view>
 			</view>
 			<image
-				src="@/assets/images/labixiaoxin.jpg"
+				src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/labixiaoxin.jpg"
 				class="bottom-img"
 			/>
 		</view>
