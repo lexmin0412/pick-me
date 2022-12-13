@@ -70,8 +70,12 @@ const config = {
     }
   },
   h5: {
-    publicPath: '/',
+    publicPath: '/pick-me',
     staticDirectory: 'static',
+    router: {
+      mode: 'browser', // 使用history模式
+      basename: '/pick-me',
+    },
     postcss: {
       autoprefixer: {
         enable: true,
