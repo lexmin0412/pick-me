@@ -34,7 +34,7 @@
 							:key="item.type"
 							class="tab-item"
 							:class="{ active: item.type === data.currentType }"
-							@click="tabClick"
+							@tap="tabClick(item)"
 							:data-type="item.type"
 						>
 							{{ item.text }}吃啥
@@ -46,8 +46,8 @@
 					</view>
 					<view
 						class="btn-start"
-						v-bind:class="{ active: data.isActive }"
-						v-on:click="btnClick"
+						:class="{ active: data.isActive }"
+						@tap="btnClick"
 					>
 						{{ data.btnText }}
 					</view>
@@ -62,6 +62,7 @@
 </template>
 
 <script setup>
+import Taro from '@tarojs/taro'
 import { reactive } from 'vue'
 
 /**
@@ -154,34 +155,9 @@ const data = reactive({
 	],
 })
 
-/**
- * 根据长度随机生成id
- * @param {*} num 长度
- */
-const randomRangeId = (num) => {
-	var returnStr = '',
-		charStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-	for (var i = 0; i < num; i++) {
-		var index = Math.round(Math.random() * (charStr.length - 1))
-		returnStr += charStr.substring(index, index + 1)
-	}
-	return returnStr
-}
-
-const currentList = foodList.breakfast
-
-const tabClick = e => {
-	var currentNode = e
-	var tabElementList = document.getElementsByClassName('tab-item')
-	data.currentType = e.target.dataset.type
-	data.currentList = data.foodList[data.currentType]
-	for (var i = 0; i < tabElementList.length; i++) {
-		if (tabElementList[i].dataset.type == data.currentType) {
-			tabElementList[i].classList.add('active')
-		} else {
-			tabElementList[i].classList.remove('active')
-		}
-	}
+const tabClick = item => {
+  data.currentType = item.type
+  data.currentList = data.foodList[data.currentType]
 }
 
 const btnClick = () => {
@@ -195,7 +171,7 @@ const btnClick = () => {
 const startRandom = () => {
 	data.isActive = true
 	data.btnText = '停'
-	var list = currentList
+	var list = data.currentList
 	data.randomId = setInterval(() => {
 		data.message = list[Math.floor(Math.random() * list.length)].name
 		if (data.currentType === 'breakfast') {
@@ -211,7 +187,7 @@ const stopRandom = () => {
 	data.btnText = '点击开始'
 
 	// 通过算法计算最终结果
-	var arr = currentList.reduce(function (a, b) {
+	var arr = data.currentList.reduce(function (a, b) {
 		return a.weight + b.weight
 	})
 
