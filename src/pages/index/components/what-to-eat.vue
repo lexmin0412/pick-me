@@ -40,7 +40,8 @@
 				</view>
 				<view class="display-item">
 					{{ data.currentBuyer }}
-					{{ data.currentBuyer ? '买' : '' }} {{ data.message }}
+					{{ data.currentBuyer ? '买' : '' }}
+          {{ data.message }}
 				</view>
 				<button
 					color="#45AB7F"
@@ -164,11 +165,11 @@ const startRandom = () => {
 	var list = data.currentList
 	data.randomId = setInterval(() => {
 		data.message = list[Math.floor(Math.random() * list.length)].name
-		if (data.currentType === 'breakfast') {
+		// if (data.currentType === 'breakfast') {
 			data.currentBuyer = user.userList[Math.floor(Math.random() * user.userList.length)].name
-		} else {
-			data.currentBuyer = ''
-		}
+		// } else {
+		// 	data.currentBuyer = ''
+		// }
 	}, 100)
 }
 
