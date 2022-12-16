@@ -1,141 +1,106 @@
 <template>
-	<view>
-		<view id="app">
-			{{ schnappiMusic }}
-			<audio
-				src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/audio/schnappi.m4a"
-				:autoplay="true"
-				id="bg_audio"
-        style="width: 0;height:0"
-			/>
+	<view class="container" :style="{height: data.containerHeight}">
+		<audio
+			src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/audio/schnappi.m4a"
+			:autoplay="true"
+			id="bg_audio"
+			style="width: 0; height: 0"
+		/>
 
-			<view class="head-box">
-				<image
-					src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/timg.gif"
-					alt=""
-				/>
-				<view class="head-title">
-					<view class="head-title-item">今</view>
-					<view class="head-title-item">天</view>
-					<view class="head-title-item">吃</view>
-					<view class="head-title-item">什</view>
-					<view class="head-title-item">么</view>
-					<view class="head-title-item">呢</view>
-					<view class="head-title-item">?</view>
-				</view>
-			</view>
-
-			<view class="main-box">
-				<view class="main-mask"></view>
-				<view class="main-content">
-					<view class="tab-list">
-						<view
-							v-for="item in data.tabList"
-							:key="item.type"
-							class="tab-item"
-							:class="{ active: item.type === data.currentType }"
-							@tap="tabClick(item)"
-							:data-type="item.type"
-						>
-							{{ item.text }}吃啥
-						</view>
-					</view>
-					<view class="display-item">
-						{{ data.currentType === 'breakfast' ? data.currentBuyer : '' }}
-						{{ data.currentType === 'breakfast' ? '买' : '' }} {{ data.message }}
-					</view>
-					<view
-						class="btn-start"
-						:class="{ active: data.isActive }"
-						@tap="btnClick"
-					>
-						{{ data.btnText }}
-					</view>
-				</view>
-			</view>
+		<view class="head-box">
 			<image
-				src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/labixiaoxin.jpg"
-				class="bottom-img"
+				src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/timg.gif"
+				alt=""
 			/>
+			<view class="head-title">
+				<view class="head-title-item">今</view>
+				<view class="head-title-item">天</view>
+				<view class="head-title-item">吃</view>
+				<view class="head-title-item">什</view>
+				<view class="head-title-item">么</view>
+				<view class="head-title-item">呢</view>
+				<view class="head-title-item">?</view>
+			</view>
 		</view>
+
+		<view class="main-box">
+			<view class="main-mask"></view>
+			<view class="main-content">
+				<view class="tab-list">
+					<view
+						v-for="item in data.tabList"
+						:key="item.type"
+						class="tab-item"
+						:class="{ active: item.type === data.currentType }"
+						@tap="tabClick(item)"
+						:data-type="item.type"
+					>
+						{{ item.text }}吃啥
+					</view>
+				</view>
+				<view class="display-item">
+					{{ data.currentBuyer }}
+					{{ data.currentBuyer ? '买' : '' }} {{ data.message }}
+				</view>
+				<button
+					color="#45AB7F"
+					@tap="btnClick"
+					class="btn-start"
+					:class="{ active: data.isActive }"
+					>{{ data.btnText }}</button
+				>
+			</view>
+			<!-- <view class="settings">
+				<image
+					class="setting-icon"
+					src="./../../../assets/images/icons/icon_setting.png"
+				/>
+			</view> -->
+		</view>
+		<image
+			src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/labixiaoxin.jpg"
+			class="bottom-img"
+		/>
 	</view>
 </template>
 
 <script setup>
 import Taro from '@tarojs/taro'
 import { reactive } from 'vue'
+import { useUserStore } from '@/stores/users'
+import { useFoodsStore } from '@/stores/foods'
+
+const user = useUserStore()
+const foods = useFoodsStore()
+
+console.log('user', user)
 
 /**
  * 食物列表
  */
 const foodList = {
 	// 早餐列表
-	breakfast: [
-		{
-			name: '酱香饼',
-			weight: 100,
-		},
-		{
-			name: '鸡蛋饼',
-			weight: 100,
-		},
-		{
-			name: '热狗卷',
-			weight: 100,
-		},
-		{
-			name: '粥+茶叶蛋',
-			weight: 100,
-		},
-		{
-			name: '酸菜包*2',
-			weight: 100,
-		},
-	],
+	breakfast: foods.foodList,
 
 	// 中午
-	lunch: [
-		{
-			name: '蒸菜',
-			weight: 100,
-		},
-		{
-			name: '厚锅掌勺',
-			weight: 100,
-		},
-		{
-			name: '粉',
-			weight: 100,
-		},
-	],
+	lunch: foods.foodList,
 
 	// 晚上
-	dinner: [
-		{
-			name: '粉',
-			weight: 100,
-		},
-		{
-			name: '饭',
-			weight: 100,
-		},
-		{
-			name: '凉面',
-			weight: 100,
-		},
-	],
+	dinner: foods.foodList,
 }
 
+console.log('process.env.TARO_ENV', process.env.TARO_ENV)
+
 const data = reactive({
+  containerHeight: process.env.TARO_ENV === 'h5' ? 'calc(100vh - 50px)' : '100vh',
 	btnText: '点击开始',
 	isActive: false,
-	message: '',
+	message: foods.foodList[0].name,
 	randomId: '',
 	currentDuration: '早上',
-	currentBuyer: '张小乐',
+	currentBuyer: user.userList[0].name,
 	foodList: foodList,
 	currentList: foodList.breakfast,
-	buyerList: ['张小乐', '黄小敏'],
 	// 当前type
 	currentType: 'breakfast',
 	// tab列表
@@ -153,14 +118,39 @@ const data = reactive({
 			text: '晚上',
 		},
 	],
+	navList: [
+		{
+			id: 1,
+			text: '首页',
+			icon: 'https://img11.360buyimg.com/imagetools/jfs/t1/117646/2/11112/1297/5ef83e95E81d77f05/daf8e3b1c81e3c98.png',
+		},
+		{
+			id: 2,
+			text: '分类',
+			icon: 'https://img12.360buyimg.com/imagetools/jfs/t1/119490/8/9568/1798/5ef83e95E968c69a6/dd029326f7d5042e.png',
+		},
+		{
+			id: 3,
+			text: '购物车',
+			num: 2,
+			icon: 'https://img14.360buyimg.com/imagetools/jfs/t1/130725/4/3157/1704/5ef83e95Eb976644f/b36c6cfc1cc1a99d.png',
+		},
+		{
+			id: 4,
+			text: '我的',
+			icon: 'https://img12.360buyimg.com/imagetools/jfs/t1/147573/29/1603/1721/5ef83e94E1393a678/5ddf1695ec989373.png',
+		},
+	],
+	navVisible: false,
 })
 
 const tabClick = item => {
-  data.currentType = item.type
-  data.currentList = data.foodList[data.currentType]
+	data.currentType = item.type
+	data.currentList = foods.foodList
 }
 
 const btnClick = () => {
+  console.log('btnClick')
 	if (data.isActive) {
 		stopRandom()
 	} else {
@@ -175,7 +165,7 @@ const startRandom = () => {
 	data.randomId = setInterval(() => {
 		data.message = list[Math.floor(Math.random() * list.length)].name
 		if (data.currentType === 'breakfast') {
-			data.currentBuyer = data.buyerList[Math.floor(Math.random() * 2)]
+			data.currentBuyer = user.userList[Math.floor(Math.random() * user.userList.length)].name
 		} else {
 			data.currentBuyer = ''
 		}
