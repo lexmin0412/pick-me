@@ -4,14 +4,20 @@
   </view>
 </template>
 
-<script>
+<script setup>
+import { useShareAppMessage } from '@tarojs/taro'
 import './index.less'
 import WhatToEat from './components/what-to-eat.vue'
 
-export default {
-  name: 'home-index',
-  components: {
-    WhatToEat
+useShareAppMessage(res => {
+  if (res.from === 'button') {
+    // 来自页面内转发按钮
+    console.log(res.target)
   }
-}
+  return {
+    title: '治好你的选择困难症',
+    path: '/page/index/index'
+  }
+})
+
 </script>

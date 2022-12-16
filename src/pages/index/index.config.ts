@@ -1,3 +1,5 @@
-export default {
-  navigationBarTitleText: '今天吃什么'
-}
+export default definePageConfig({
+  navigationBarTitleText: '今天吃什么',
+  enableShareAppMessage: true,
+  enableShareTimeline: true
+})
