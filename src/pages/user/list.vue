@@ -7,7 +7,7 @@
 			:value="data.userName"
 			@input="handleUserNameChange"
 		/>
-		<button @tap="handleAddUser">新增用户</button>
+		<button class="button" @tap="handleAddUser">新增用户</button>
 		<view class="user-list-box">
 			<view class="mt-20 user-list-header"> 用户列表 </view>
 			<view class="user-list">

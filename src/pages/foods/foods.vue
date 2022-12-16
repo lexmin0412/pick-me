@@ -7,7 +7,7 @@
 			:value="data.foodName"
 			@input="handleFoodNameChange"
 		/>
-		<button @tap="handleAddFood">新增食物</button>
+		<button class="button" @tap="handleAddFood">新增食物</button>
 		<view class="user-list-box">
 			<view class="mt-20 user-list-header"> 食物列表 </view>
 			<view class="user-list">
