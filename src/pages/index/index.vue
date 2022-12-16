@@ -16,7 +16,7 @@ useShareAppMessage(res => {
   }
   return {
     title: '治好你的选择困难症',
-    path: '/page/index/index'
+    path: '/pages/index/index'
   }
 })
 
