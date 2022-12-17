@@ -16,4 +16,4 @@
 
 ### 小程序
 
-![小程序码](https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/gh_e87c955b6cb4_1280.jpg)
+<img src="https://lexmin.oss-cn-hangzhou.aliyuncs.com/statics/pick-me/images/gh_e87c955b6cb4_1280.jpg" width="200" height="200" style="border-radius: 100px" />
