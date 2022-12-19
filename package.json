@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"private": true,
 	"description": "选择困难症解决方案",
+  "keywords": [
+    "taro3",
+    "vue3"
+  ],
 	"templateInfo": {
 		"name": "vue3-pinia",
 		"typescript": true,
@@ -32,7 +36,14 @@
 		"Android >= 4.1",
 		"ios >= 8"
 	],
-	"author": "",
+	"author": {
+		"name": "lexmin0412",
+		"email": "zhangle_dev@outlook.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lexmin0412/pick-me.git"
+	},
 	"license": "MIT",
 	"dependencies": {
 		"@babel/runtime": "^7.7.7",
