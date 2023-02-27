@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { Button, Icon, Drag, CellGroup, Cell } from '@nutui/nutui-taro'
+import { checkMobile } from './utils/navigator'
 import "@nutui/nutui-taro/dist/style.css";
 
 import './app.less'
@@ -9,6 +10,7 @@ import './app.less'
 const App = createApp({
   onShow(options) {
     console.log('options', options)
+    checkMobile()
     Taro.showToast({
       icon: 'none',
       title: '欢迎回来～'
